@@ -17,7 +17,10 @@ const astoschema = mongoose.Schema({
 });
 
 const rashiSchema =mongoose.Schema({
-    
+    pid:Number,
+    pname: String,
+    pdesc:String,
+    pimage: String
 })
 
 const userSchema = mongoose.Schema({  
@@ -28,6 +31,7 @@ const userSchema = mongoose.Schema({
 
 const vignesh = mongoose.model("vignesh", astoschema);
 const User = mongoose.model("User", userSchema);
+const rashi = mongoose.model("rashi", rashiSchema);
 
-module.exports = { vignesh, User };
+module.exports = { vignesh, User ,rashi};
 

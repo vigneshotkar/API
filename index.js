@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const multer = require("multer");
 // const { vignesh, User } = require("./astoSchema"); // Importing models
-const {vignesh,User} =require("./astoschema")
+const {vignesh,User,rashi} =require("./astoschema")
 
 app.use(cors());
 app.use(express.json());
@@ -77,6 +77,30 @@ app.get("/user",async (req,resp)=>{
     resp.send(users)
 })
 
+
+
+app.post("/rashi",(req,resp)=>{
+    upload(req,resp,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            const newrashi =new rashi({
+                    pid:req.body.pid,
+                    pname: req.body.pname,
+                    pdesc:req.body.pdesc,
+                    pimage: "http://localhost:4000/uploads/" + req.file.filename
+            })
+            newrashi.save()
+            resp.send("File Uploaded")
+        }
+    })
+})
+
+app.get("/rashi",async(req,resp)=>{
+    const rashis= await rashi.find()
+         resp.send(rashis)
+})
 
 
 
