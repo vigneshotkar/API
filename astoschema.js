@@ -20,7 +20,7 @@ const rashiSchema =mongoose.Schema({
     
 })
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({  
     pid: Number,
     pname: String,
     pemail: String
