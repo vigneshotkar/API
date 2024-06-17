@@ -47,6 +47,11 @@ app.get("/vignesh",async (req,resp)=>{
         const data=await vignesh.find() 
         resp.send(data)
     })
+    app.get("/vignesh/pid",async (req,resp)=>{
+        const data=await vignesh.find() 
+        resp.send(data)
+    })
+    
 
 //user collection
 app.post("/user", async (req, res) => {
