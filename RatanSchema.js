@@ -29,9 +29,16 @@ const userSchema = mongoose.Schema({
     pemail: String
 });
 
+const RataSchema = mongoose.Schema({
+    pid:Number,
+    pname:String,
+    pimage:String
+});
+
 const vignesh = mongoose.model("vignesh", astoschema);
 const User = mongoose.model("User", userSchema);
 const rashi = mongoose.model("rashi", rashiSchema);
+const Rata = mongoose.model("ratan",RataSchema)
 
-module.exports = { vignesh, User ,rashi};
+module.exports = { vignesh,User,rashi,Rata};
 

@@ -1,10 +1,10 @@
-require("./mongoose")
+require ("./mongoose")
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const multer = require("multer");
 // const { vignesh, User } = require("./astoSchema"); // Importing models
-const {vignesh,User,rashi} =require("./astoschema")
+const {vignesh,User,rashi,Rata,} =require("./RatanSchema")
 
 app.use(cors());
 app.use(express.json());
@@ -48,9 +48,6 @@ app.get("/vignesh",async (req,resp)=>{
         resp.send(data)
     })
 
-
-
-
 //user collection
 app.post("/user", async (req, res) => {
     upload(req, res, async (err) => {
@@ -59,9 +56,9 @@ app.post("/user", async (req, res) => {
            
         } else {
                 const newUser = new User({
-                    uid: req.body.uid,
-                    username: req.body.username,
-                    email:req.body.email
+                    pid: req.body.pid,
+                    pname: req.body.username,
+                   pemail:req.body.pemail
                 });
                  newUser.save()
                 res.send("File Uploaded")
@@ -96,12 +93,31 @@ app.post("/rashi",(req,resp)=>{
         }
     })
 })
+    app.get("/rashi",async (req,resp)=>{
+        const rashis=await rashi.find() 
+        resp.send(rashis)
+    })
 
-app.get("/rashi",async(req,resp)=>{
-    const rashis= await rashi.find()
-         resp.send(rashis)
-})
+    app.post("/Rata",(req,resp)=>{
+        upload(req,resp,(err)=>{
+            if(err){
+                console.log(err)
+            }
+            else{
+                const newRata =new Rata({
+                        pid:req.body.pid,
+                        pname: req.body.pname,
+                        pimage: "http://localhost:4000/uploads/" + req.file.filename
+                })
+                newRata.save()
+                resp.send("File Uploaded")
+            }
+        })
+    })
 
-
+    app.get("/Rata",async (req,resp)=>{
+        const Ratas=await Rata.find() 
+        resp.send(Ratas)
+    })
 
 app.listen(4000)
